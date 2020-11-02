@@ -1,5 +1,5 @@
 export default class Utils {
-    static ConvertSlugToName(string: string): string {
+    static ConvertNameToSlug(string: string): string {
         const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
         const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
         const p = new RegExp(a.split('').join('|'), 'g')

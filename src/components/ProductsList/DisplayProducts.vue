@@ -4,8 +4,8 @@
             <div class="col-12">
                 <ul class="list-item">
                     <li v-for="(product, index) in productList" :key="index" :class="generateClassListItem(product.slug)" @click="triggerCheckboxChange(product.slug, $event)">
-                        <input :id="product.name.toLowerCase()" v-model="selectedProducts" type="checkbox" :value="product.name.toLowerCase()" />
-                        <label :for="product.name.toLowerCase()">{{ product.name }}</label>
+                        <input :id="product.slug" v-model="selectedProducts" type="checkbox" :value="product.slug" />
+                        <label :for="product.slug">{{ product.name }}</label>
                         <div class="options">
                             <button class="delete-item position-absolute" @click="deleteProduct(product.slug)">
                                 <i class="fas fa-times"/>
@@ -71,11 +71,13 @@ export default class AddProduct extends Vue {
 
     @Watch('value')
     submit(value: string) {
-        if (!this.productList.some(e => e.name === value)) {
+        const slug = Utils.ConvertNameToSlug(value)
+
+        if (!this.productList.some(e => e.slug === slug)) {
             const product: Product = {
                 id: this.productList.length,
                 name: value,
-                slug: Utils.ConvertSlugToName(value)
+                slug
             }
             this.productList.push(product)
         }
