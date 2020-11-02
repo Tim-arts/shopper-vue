@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-12">
                 <ul class="list-item">
-                    <li v-for="(product, index) in productList" :key="index" :class="generateClassListItem(product.slug)" @click="triggerCheckboxChange(product.slug, $event)">
-                        <input :id="product.slug" v-model="selectedProducts" type="checkbox" :value="product.slug" />
-                        <label :for="product.slug">{{ product.name }}</label>
+                    <li v-for="(product, index) in productList" :key="index" :class="['item', 'd-flex', 'align-items-center', 'position-relative', { selected: product.selected }]" @click="toggleSelectedClass(product.id)">
+                        <input :id="product.slug" :checked="product.selected" type="checkbox" :value="product.slug" />
+                        <label :for="product.slug" @click.prevent>{{ product.name }}</label>
                         <div class="options">
                             <button class="delete-item position-absolute" @click="deleteProduct(product.slug)">
                                 <i class="fas fa-times"/>
@@ -15,6 +15,7 @@
                 </ul>
             </div>
         </div>
+        {{ productList }}
     </div>
 </template>
 
@@ -30,52 +31,23 @@ import productList from '@/static/products.json'
 export default class AddProduct extends Vue {
     @Prop() value!: string
 
-    selectedProducts: any[] = []
-
     productList: any[] = productList
-
-    isChecked(name: string): boolean {
-        return this.selectedProducts.includes(name)
-    }
 
     deleteProduct(slug: string) {
         this.productList = this.productList.filter(o => o.slug !== slug)
     }
 
-    generateClassListItem(slug: string): any[] {
-        const result: any[] = [
-            'item',
-            'd-flex',
-            'align-items-center',
-            'position-relative'
-        ]
-
-        if (this.isChecked(slug)) {
-            result.push('active')
-        }
-
-        return result
-    }
-
-    triggerCheckboxChange(slug: string, e: Event) {
-        const element = e.target as HTMLElement
-        const array = Utils.ToggleValueFromArray(slug, this.selectedProducts)
-
-        if (element.tagName === 'LI') {
-            const checkbox = element.querySelector('[type="checkbox"]') as HTMLInputElement
-            checkbox.checked = !checkbox.checked
-        } else if (element.tagName === 'LABEL') {
-            e.preventDefault()
-        }
-
-        this.selectedProducts = array
+    toggleSelectedClass(id: number) {
+        const product = this.productList.find(p => p.id === id)
+        product.selected = !product.selected
     }
 
     @Watch('value')
     submit(value: string) {
         const slug = Utils.ConvertNameToSlug(value)
+        const isProductAlreadyExist = Utils.CheckArrayOfObjectsIncludesSlug(slug, this.productList)
 
-        if (!this.productList.some(e => e.slug === slug)) {
+        if (!isProductAlreadyExist) {
             const product: Product = {
                 id: this.productList.length,
                 name: value,

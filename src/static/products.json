@@ -1,37 +1,44 @@
 [
     {
         "name": "Eggs",
-        "index": 0,
-        "slug": "eggs"
+        "id": 0,
+        "slug": "eggs",
+        "selected": false
     },
     {
         "name": "Milk",
-        "index": 1,
-        "slug": "milk"
+        "id": 1,
+        "slug": "milk",
+        "selected": false
     },
     {
         "name": "Cheese",
-        "index": 2,
-        "slug": "cheese"
+        "id": 2,
+        "slug": "cheese",
+        "selected": false
     },
     {
         "name": "Butter",
-        "index": 3,
-        "slug": "butter"
+        "id": 3,
+        "slug": "butter",
+        "selected": false
     },
     {
         "name": "Bread",
-        "index": 4,
-        "slug": "bread"
+        "id": 4,
+        "slug": "bread",
+        "selected": false
     },
     {
         "name": "Toilet paper",
-        "index": 5,
-        "slug": "toilet-paper"
+        "id": 5,
+        "slug": "toilet-paper",
+        "selected": false
     },
     {
         "name": "Chicken",
-        "index": 6,
-        "slug": "chicken"
+        "id": 6,
+        "slug": "chicken",
+        "selected": false
     }
 ]

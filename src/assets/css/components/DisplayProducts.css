@@ -159,7 +159,7 @@ ul li:hover {
   background-color: #ffcc3f;
   transition: background-color 0.3s;
 }
-ul li.active {
+ul li.selected {
   background-color: #ffcc3f;
 }
 

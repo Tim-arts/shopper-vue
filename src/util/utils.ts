@@ -14,15 +14,7 @@ export default class Utils {
             .replace(/-+$/, '') // Trim - from end of text
     }
 
-    static ToggleValueFromArray(value: string, array: any[]): any[] {
-        let arr: any[] = array
-
-        if (arr.includes(value)) {
-            arr = array.filter(e => e !== value)
-        } else {
-            arr.push(value)
-        }
-
-        return arr
+    static CheckArrayOfObjectsIncludesSlug(property, array) {
+        return array.some(item => item.slug === property)
     }
 }
