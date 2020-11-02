@@ -1,9 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap");
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
+/* Colors */
+/* Box Shadow */
+/* Media Query Ranges */
 #body {
   font-family: Montserrat, Arial, sans-serif;
 }
 #body a {
+  color: #2d2c32;
   text-decoration: none;
 }
 #body ul {

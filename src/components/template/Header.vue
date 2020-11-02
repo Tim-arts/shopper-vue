@@ -2,7 +2,9 @@
     <header class="container">
         <nav class="row">
             <div class="col-12">
-                <h1 class="h3">Shopper</h1>
+                <h1 class="h3">
+                    <a href="/">Shopper</a>
+                </h1>
             </div>
         </nav>
     </header>
