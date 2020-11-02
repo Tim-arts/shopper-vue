@@ -64,6 +64,8 @@ export default class AddProduct extends Vue {
         if (element.tagName === 'LI') {
             const checkbox = element.querySelector('[type="checkbox"]') as HTMLInputElement
             checkbox.checked = !checkbox.checked
+        } else if (element.tagName === 'LABEL') {
+            e.preventDefault()
         }
 
         this.selectedProducts = array
