@@ -2,5 +2,5 @@ export interface Product {
     id?: number
     name?: string
     slug?: string
-    selected?: string
+    selected?: boolean
 }

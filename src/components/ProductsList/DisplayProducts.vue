@@ -50,7 +50,8 @@ export default class AddProduct extends Vue {
             const product: Product = {
                 id: this.productList.length,
                 name: value,
-                slug
+                slug,
+                selected: false
             }
             this.productList.push(product)
         }
