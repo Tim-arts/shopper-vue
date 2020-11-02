@@ -1,0 +1,21 @@
+@import "./../base/variables";
+
+input[type="text"] {
+    color: $black;
+    background-color: $purple;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-radius: 18px;
+    transition: background-color .2s;
+    will-change: background-color;
+
+    &::placeholder {
+        color: fade-out($black, .5);
+    }
+
+    &:focus {
+        background-color: fade-out($purple, .3);
+        outline: none;
+    }
+}
