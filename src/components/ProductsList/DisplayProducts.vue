@@ -45,7 +45,9 @@ export default class AddProduct extends Vue {
         const array: any[] = this.productList
         const index: number = array.findIndex(p => product.id === p.id)
 
+        // Delete item from array at specified index
         array.splice(index, 1)
+        // Insert item into array at specified index and delete 0 items
         array.splice(array.length, 0, product)
 
         this.productList = array
