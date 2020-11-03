@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <ul class="list-item">
-                    <li v-for="(product, index) in productList" :key="index" :class="['item', 'd-flex', 'align-items-center', 'position-relative', { selected: product.selected }]" @click="toggleSelectedClass(product.id)">
+                    <li v-for="(product, index) in sortProductsByNotSelected" :key="index" :class="['item', 'd-flex', 'align-items-center', 'position-relative', { selected: product.selected }]" @click="toggleSelectedClass(product.id)">
                         <input :id="product.slug" :checked="product.selected" type="checkbox" :value="product.slug" />
                         <label :for="product.slug" @click.prevent>{{ product.name }}</label>
                         <div class="options">
@@ -31,6 +31,10 @@ export default class AddProduct extends Vue {
     @Prop() value!: string
 
     productList: any[] = productList
+
+    get sortProductsByNotSelected(): any[] {
+        return this.productList.sort(p => (p.selected ? 0 : -1))
+    }
 
     deleteProduct(slug: string) {
         this.productList = this.productList.filter(o => o.slug !== slug)
