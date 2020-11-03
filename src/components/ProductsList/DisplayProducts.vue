@@ -17,7 +17,7 @@
                         <input :id="product.slug" :checked="product.selected" type="checkbox" :value="product.slug" />
                         <label :for="product.slug" @click.prevent>{{ product.name }}</label>
                         <div class="options">
-                            <button class="delete-item position-absolute" @click="deleteProduct(product.slug)" @click.prevent @click.stop>
+                            <button class="delete-item position-absolute" @click="deleteProduct(product.slug)">
                                 <i class="fas fa-times"/>
                             </button>
                         </div>
