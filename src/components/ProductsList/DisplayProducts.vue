@@ -59,7 +59,9 @@ export default class AddProduct extends Vue {
         const product: object = this.productList.find(p => p.slug === slug)
         product.selected = !product.selected
 
-        this.sortArray(product)
+        if (product.selected) {
+            this.sortArray(product)
+        }
     }
 
     @Watch('value')
