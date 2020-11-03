@@ -43,7 +43,7 @@ export default class AddProduct extends Vue {
 
     sortArray(product: object) {
         const array: any[] = this.productList
-        const index: number = array.findIndex(p1 => product.id === p1.id)
+        const index: number = array.findIndex(p => product.id === p.id)
 
         array.splice(index, 1)
         array.splice(array.length, 0, product)
