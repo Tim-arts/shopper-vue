@@ -42,9 +42,9 @@ export default class AddProduct extends Vue {
 
     productList: any[] = productList
 
-    sortArray(product: object) {
+    sortArray(product: Product) {
         const array: any[] = this.productList
-        const index: number = array.findIndex(p => product.id === p.id)
+        const index: number = array.findIndex((o: Product) => product.id === o.id)
 
         // Delete item from array at specified index
         array.splice(index, 1)
@@ -55,11 +55,11 @@ export default class AddProduct extends Vue {
     }
 
     deleteProduct(slug: string) {
-        this.productList = this.productList.filter(o => o.slug !== slug)
+        this.productList = this.productList.filter((o: Product) => o.slug !== slug)
     }
 
     toggleChecked(slug: string) {
-        const product: object = this.productList.find(p => p.slug === slug)
+        const product: Product = this.productList.find((o: Product) => o.slug === slug)
         product.selected = !product.selected
 
         if (product.selected) {
