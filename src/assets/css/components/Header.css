@@ -2,13 +2,19 @@
 /* Box Shadow */
 /* Media Query Ranges */
 header {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  --spacing: 40px;
+  padding-top: var(--spacing);
+  padding-bottom: var(--spacing);
 }
 header h1 {
   font-weight: 900 !important;
   color: #2d2c32;
   margin-bottom: 0;
+}
+@media screen and (max-width: 600px) {
+  header {
+    --spacing: 20px;
+  }
 }
 
 /*# sourceMappingURL=Header.css.map */

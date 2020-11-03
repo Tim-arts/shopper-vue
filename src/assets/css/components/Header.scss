@@ -1,14 +1,17 @@
 @import './../base/variables';
 
-$spacing: 40px;
-
 header {
-    padding-top: $spacing;
-    padding-bottom: $spacing;
+    --spacing: 40px;
+    padding-top: var(--spacing);
+    padding-bottom: var(--spacing);
 
     h1 {
         font-weight: 900 !important;
         color: $black;
         margin-bottom: 0;
+    }
+
+    @media screen and (max-width: $extra-small-screen) {
+        --spacing: 20px;
     }
 }
