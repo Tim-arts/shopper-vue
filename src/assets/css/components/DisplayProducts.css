@@ -141,6 +141,22 @@ input[type=radio] + label {
     --s: .5;
   }
 }
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 ul li {
   height: 60px;
   background-color: #f8f8f8;
@@ -148,6 +164,8 @@ ul li {
   margin: 20px 0;
   border-radius: 50px;
   cursor: pointer;
+  transition: background-color 0.5s, opacity 0.5s;
+  will-change: background-color, opacity;
 }
 ul li input[type=checkbox] {
   margin-right: 20px;
@@ -157,10 +175,16 @@ ul li label {
 }
 ul li:hover {
   background-color: #ffcc3f;
-  transition: background-color 0.3s;
 }
 ul li.selected {
   background-color: #ffcc3f;
+}
+ul li.slide-enter-to {
+  animation: fadeIn 0.5s;
+}
+
+.slide-move {
+  transition: transform 0.5s ease;
 }
 
 input[type=checkbox], label {

@@ -2,17 +2,26 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <ul class="list-item">
-                    <li v-for="(product, index) in sortProductsByNotSelected" :key="index" :class="['item', 'd-flex', 'align-items-center', 'position-relative', { selected: product.selected }]" @click="toggleSelectedClass(product.id)">
+                <transition-group name="slide" tag="ul" appear>
+                    <li v-for="(product) in productList"
+                        :key="product.slug" :class="[
+                            'item',
+                            'd-flex',
+                            'align-items-center',
+                            'position-relative',
+                            { selected: product.selected }
+                        ]"
+                        @click="toggleChecked(product.slug)"
+                    >
                         <input :id="product.slug" :checked="product.selected" type="checkbox" :value="product.slug" />
                         <label :for="product.slug" @click.prevent>{{ product.name }}</label>
                         <div class="options">
-                            <button class="delete-item position-absolute" @click="deleteProduct(product.slug)">
+                            <button class="delete-item position-absolute" @click="deleteProduct(product.slug)" @click.prevent @click.stop>
                                 <i class="fas fa-times"/>
                             </button>
                         </div>
                     </li>
-                </ul>
+                </transition-group>
             </div>
         </div>
     </div>
@@ -23,7 +32,7 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import { Product } from '@/core/types'
 import Utils from '@/util/utils'
 
-/* Load data */
+// Load static data
 import productList from '@/static/products.json'
 
 @Component
@@ -32,23 +41,31 @@ export default class AddProduct extends Vue {
 
     productList: any[] = productList
 
-    get sortProductsByNotSelected(): any[] {
-        return this.productList.sort(p => (p.selected ? 0 : -1))
+    sortArray(product: object) {
+        const array: any[] = this.productList
+        const index: number = array.findIndex(p1 => product.id === p1.id)
+
+        array.splice(index, 1)
+        array.splice(array.length, 0, product)
+
+        this.productList = array
     }
 
     deleteProduct(slug: string) {
         this.productList = this.productList.filter(o => o.slug !== slug)
     }
 
-    toggleSelectedClass(id: number) {
-        const product = this.productList.find(p => p.id === id)
+    toggleChecked(slug: string) {
+        const product: object = this.productList.find(p => p.slug === slug)
         product.selected = !product.selected
+
+        this.sortArray(product)
     }
 
     @Watch('value')
     submit(value: string) {
-        const slug = Utils.ConvertNameToSlug(value)
-        const isProductAlreadyExist = Utils.CheckArrayOfObjectsIncludesSlug(slug, this.productList)
+        const slug: string = Utils.ConvertNameToSlug(value)
+        const isProductAlreadyExist: boolean = Utils.CheckArrayOfObjectsIncludesSlug(slug, this.productList)
 
         if (!isProductAlreadyExist) {
             const product: Product = {
@@ -57,6 +74,7 @@ export default class AddProduct extends Vue {
                 slug,
                 selected: false
             }
+
             this.productList.push(product)
         }
     }
