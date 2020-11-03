@@ -17,7 +17,8 @@ module.exports = {
         'comma-dangle': ['error', 'never'],
         'max-len': 'off',
         semi: ['error', 'never', { beforeStatementContinuationChars: 'always' }],
-        'object-curly-newline': ['error', { consistent: true }]
+        'object-curly-newline': ['error', { consistent: true }],
+        'class-methods-use-this': 0
     },
     parserOptions: {
         parser: '@typescript-eslint/parser',
