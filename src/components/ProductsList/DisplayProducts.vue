@@ -4,7 +4,8 @@
             <div class="col-12">
                 <transition-group name="slide" tag="ul" appear>
                     <li v-for="(product) in productList"
-                        :key="product.slug" :class="[
+                        :key="product.slug"
+                        :class="[
                             'item',
                             'd-flex',
                             'align-items-center',
