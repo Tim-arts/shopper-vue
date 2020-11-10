@@ -45,11 +45,20 @@ export default class AddProduct extends Vue {
     sortArray(product: Product) {
         const array: any[] = this.productList
         const index: number = array.findIndex((o: Product) => product.id === o.id)
+        let count
+
+        if (product.selected) {
+            count = array.length
+        } else {
+            // Count the number of selected products
+            count = array.reduce((n: number, p: Product) => n + (p.selected ? 1 : 0), 0)
+            count = array.length - (count + 1)
+        }
 
         // Delete item from array at specified index
         array.splice(index, 1)
         // Insert item into array at specified index and delete 0 items
-        array.splice(array.length, 0, product)
+        array.splice(count, 0, product)
 
         this.productList = array
     }
@@ -62,9 +71,7 @@ export default class AddProduct extends Vue {
         const product: Product = this.productList.find((o: Product) => o.slug === slug)
         product.selected = !product.selected
 
-        if (product.selected) {
-            this.sortArray(product)
-        }
+        this.sortArray(product)
     }
 
     @Watch('value')
